@@ -3,6 +3,7 @@ using Books.Core.Services;
 using Books.Infrastructure.Data.Contexts;
 using Books.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Books.Api
 {
@@ -16,12 +17,14 @@ namespace Books.Api
             builder.Services.AddDbContext<BooksContext>(options =>
                 options.UseSqlServer(connectionString));
 
+
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<IBooksRepository, BooksRepository>();
-            builder.Services.AddScoped<IBookService, BookService>();
+            builder.Services.AddTransient<IBooksRepository, BooksRepository>();
+            builder.Services.AddTransient<IBookService, BookService>();
 
             var app = builder.Build();
 

@@ -14,9 +14,14 @@ namespace Books.Core.Services
             _repository = repository;
         }
 
-        public async Task<List<Book>> GetAllBooksAsync()
+        public async Task<IEnumerable<Book>> GetAllBooksAsync()
         {
             return await _repository.AllReadonly<Book>().ToListAsync();
+        }
+
+        public async Task<Book> GetBookAsync(int id)
+        {
+            return await _repository.GetByIdAsync<Book>(id);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Books.Core.Contracts;
 using Books.Infrastructure.Models;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Books.Api.Controllers
 {
@@ -16,9 +17,22 @@ namespace Books.Api.Controllers
         }
 
         [HttpGet]
-        public async IAsyncEnumerable<IEnumerable<Book>> GetAllBooksAsync()
+        public async IAsyncEnumerable<IEnumerable<Book>> GetAllBooks()
         {
             yield return await _bookService.GetAllBooksAsync();
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Book>> GetBook(int id)
+        {
+            var book = await _bookService.GetBookAsync(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return book;
+        }
+
+        
     }
 }

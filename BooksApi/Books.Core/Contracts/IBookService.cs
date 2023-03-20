@@ -4,6 +4,8 @@ namespace Books.Core.Contracts
 {
     public interface IBookService
     {
-        Task<List<Book>> GetAllBooksAsync();
+        Task<IEnumerable<Book>> GetAllBooksAsync();
+
+        Task<Book> GetBookAsync(int id);
     }
 }
