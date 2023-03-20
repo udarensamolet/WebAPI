@@ -8,6 +8,8 @@ namespace Books.Core.Contracts
 
         Task<Book> GetBookAsync(int id);
 
-        Task<Book> AddBook(Book book);
+        Task<Book> AddBookAsync(Book book);
+
+        Task EditBookAsync(int id, Book book);
     }
 }

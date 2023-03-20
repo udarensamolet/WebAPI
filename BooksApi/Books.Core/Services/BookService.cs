@@ -24,7 +24,7 @@ namespace Books.Core.Services
             return await _repository.GetByIdAsync<Book>(id);
         }
 
-        public async Task<Book> AddBook(Book book)
+        public async Task<Book> AddBookAsync(Book book)
         {
             var newBook = new Book()
             {
@@ -36,6 +36,15 @@ namespace Books.Core.Services
             await _repository.SaveChangesAsync();
 
             return newBook;
+        }
+
+        public async Task EditBookAsync(int id, Book book)
+        {
+            var bookToEdit = await _repository.GetByIdAsync<Book>(id);    
+            bookToEdit.Title = book.Title;
+            bookToEdit.Author = book.Author;
+
+            await _repository.SaveChangesAsync();
         }
     }
 }

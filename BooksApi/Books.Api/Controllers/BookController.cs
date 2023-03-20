@@ -36,8 +36,22 @@ namespace Books.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Book>> AddBook(Book book)
         {
-            book = await _bookService.AddBook(book);
+            book = await _bookService.AddBookAsync(book);
             return await GetBook(book.Id);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Book>> EditBook(int id, Book book)
+        {
+            var bookToEdit = await _bookService.GetBookAsync(id);
+            if (bookToEdit == null)
+            {
+                return NotFound();
+            }
+
+            await _bookService.EditBookAsync(id, book);
+
+            return await GetBook(id);
         }
     }
 }
