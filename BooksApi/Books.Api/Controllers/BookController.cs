@@ -75,7 +75,7 @@ namespace Books.Api.Controllers
         public async Task<IActionResult> AddBook(Book book)
         {
             book = await _bookService.AddBookAsync(book);
-            return Created(nameof(GetBook), book);
+            return CreatedAtAction(nameof(GetBook), new {id = book.Id}, book);
         }
 
         /// <summary>
