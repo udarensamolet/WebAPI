@@ -11,5 +11,8 @@ namespace Books.Core.Contracts
         Task<Book> AddBookAsync(Book book);
 
         Task EditBookAsync(int id, Book book);
+
+        Task EditBookPartiallyAsync(int id, Book book);
+
     }
 }

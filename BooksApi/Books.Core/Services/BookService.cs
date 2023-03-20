@@ -46,5 +46,17 @@ namespace Books.Core.Services
 
             await _repository.SaveChangesAsync();
         }
+
+        public async Task EditBookPartiallyAsync(int id, Book book)
+        {
+            var bookToEdit = await _repository.GetByIdAsync<Book>(id);
+            bookToEdit.Title = String.IsNullOrEmpty(book.Title)
+                ? bookToEdit.Title : book.Title;
+            bookToEdit.Author = String.IsNullOrEmpty(book.Author)
+                ? bookToEdit.Author : book.Author;
+
+            await _repository.SaveChangesAsync();
+        }
+
     }
 }

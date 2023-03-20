@@ -53,5 +53,21 @@ namespace Books.Api.Controllers
 
             return await GetBook(id);
         }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Book>> EditBookPartially(int id, Book book)
+        {
+            var bookToEdit = await _bookService.GetBookAsync(id);
+            if (bookToEdit == null)
+            {
+                return NotFound();
+            }
+
+            await _bookService.EditBookPartiallyAsync(id, book);
+
+            return await GetBook(id);
+        }
+
+
     }
 }
