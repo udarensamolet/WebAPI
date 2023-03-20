@@ -68,6 +68,15 @@ namespace Books.Api.Controllers
             return await GetBook(id);
         }
 
-
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Book>> DeleteBook(int id)
+        {
+            var book = await _bookService.GetBookAsync(id);
+            if(book == null)
+            {
+                return NotFound();
+            }
+            return await _bookService.DeleteBookAsync(id);
+        }
     }
 }

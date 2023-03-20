@@ -58,5 +58,14 @@ namespace Books.Core.Services
             await _repository.SaveChangesAsync();
         }
 
+        public async Task<Book> DeleteBookAsync(int id)
+        {
+            var book = await _repository.GetByIdAsync<Book>(id);
+
+            await _repository.DeleteAsync<Book>(id);
+            await _repository.SaveChangesAsync();
+
+            return book;
+        }
     }
 }
