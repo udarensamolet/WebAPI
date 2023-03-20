@@ -23,5 +23,19 @@ namespace Books.Core.Services
         {
             return await _repository.GetByIdAsync<Book>(id);
         }
+
+        public async Task<Book> AddBook(Book book)
+        {
+            var newBook = new Book()
+            {
+                Title = book.Title,
+                Author = book.Author
+            };
+
+            await _repository.AddAsync(newBook);
+            await _repository.SaveChangesAsync();
+
+            return newBook;
+        }
     }
 }

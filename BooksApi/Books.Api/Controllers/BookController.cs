@@ -33,6 +33,11 @@ namespace Books.Api.Controllers
             return book;
         }
 
-        
+        [HttpPost]
+        public async Task<ActionResult<Book>> AddBook(Book book)
+        {
+            book = await _bookService.AddBook(book);
+            return await GetBook(book.Id);
+        }
     }
 }

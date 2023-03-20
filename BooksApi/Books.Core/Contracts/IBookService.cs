@@ -7,5 +7,7 @@ namespace Books.Core.Contracts
         Task<IEnumerable<Book>> GetAllBooksAsync();
 
         Task<Book> GetBookAsync(int id);
+
+        Task<Book> AddBook(Book book);
     }
 }
